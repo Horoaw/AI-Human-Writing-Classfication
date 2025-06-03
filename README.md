@@ -10,7 +10,7 @@ This project is structured into three main stages for detecting AI-generated tex
 --------------------------------------
 📁 Project Structure
 --------------------------------------
-.
+
 ├── GetData.py
 ├── TokenizProcess.py
 ├── Training-the-model.py
