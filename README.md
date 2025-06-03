@@ -12,14 +12,23 @@ This project is structured into three main stages for detecting AI-generated tex
 --------------------------------------
 
 ├── GetData.py
+
 ├── TokenizProcess.py
+
 ├── Training-the-model.py
+
 ├── main.py 
+
 ├── data/
+
 │   ├── raw_data.csv         # Input CSV file with text and label columns
+
 │   ├── labels.npy           # Saved labels for training
+
 │   └── bert_embeddings.pt   # Saved BERT embeddings
+
 ├── README.txt               # You are here
+
 └── requirements.txt         # Python dependencies
 
 --------------------------------------
