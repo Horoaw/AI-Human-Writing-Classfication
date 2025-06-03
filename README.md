@@ -38,6 +38,8 @@ This project focuses on building a robust **text classification system** using *
 - Metrics comparison bar chart (`model_metrics_comparison.png`)
 - XGBoost accuracy/loss curves
 - Tree visualization for both XGBoost and RandomForest (1st tree)
+  ![image](https://github.com/user-attachments/assets/5fdf5606-8d3e-4a2c-b934-ed27c7a647b8)
+
 
 ### 📦 6. Saving Artifacts
 - Trained models saved as `.pkl` files with timestamp
