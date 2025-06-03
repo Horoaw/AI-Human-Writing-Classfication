@@ -1,86 +1,78 @@
-# Text Classification System using BERT and Ensemble Models
+AI-Generated Text Detection Pipeline
+====================================
 
-## Overview
+This project is structured into three main stages for detecting AI-generated text:
 
-This project focuses on building a robust **text classification system** using **BERT-based embeddings** and ensemble classifiers (Logistic Regression, Random Forest, XGBoost). The system extracts semantic features from textual data using a pre-trained transformer and trains several models for evaluation, comparison, and eventual ensemble-based inference.
+1. GetData.py             --> Loads and cleans dataset.
+2. TokenizProcess.py      --> Tokenizes and embeds text using BERT.
+3. Training-the-model.py  --> Trains and evaluates a classifier using extracted features.
 
----
+--------------------------------------
+📁 Project Structure
+--------------------------------------
+.
+├── GetData.py
+├── TokenizProcess.py
+├── Training-the-model.py
+├── main.py 
+├── data/
+│   ├── raw_data.csv         # Input CSV file with text and label columns
+│   ├── labels.npy           # Saved labels for training
+│   └── bert_embeddings.pt   # Saved BERT embeddings
+├── README.txt               # You are here
+└── requirements.txt         # Python dependencies
 
-## ✅ Work Completed
+--------------------------------------
+🚀 Quick Start
+--------------------------------------
 
-### 🔍 1. Data Loading
-- Loads data from `balanced_100k_dataset.csv`, expecting columns `text` and `label`.
+Step 1: Install Dependencies
+----------------------------
+Make sure you have Python 3.8+ and CUDA GPU. Then install dependencies:
 
-### 🧠 2. Feature Extraction via BERT
-- A custom `BertFeatureExtractor` class uses `distilbert-base-uncased` to:
-  - Tokenize text
-  - Extract `[CLS]` and mean-pooled embeddings
-  - Concatenate them to form a rich vector representation
-- Embeddings are cached in `bert_embeddings.pt` for speedup.
+    pip install -r requirements.txt
 
-### 🏗️ 3. Model Initialization
-- Three classifiers initialized:
-  - **Logistic Regression** with hyperparameter tuning using `GridSearchCV`
-  - **Random Forest** with `GridSearchCV`
-  - **XGBoost** with GPU acceleration (`gpu_hist`) if available
+Step 2: Prepare Your Dataset
+----------------------------
+Put your CSV file (with columns like "text" and "label") into the `data/` directory:
 
-### 🏋️‍♂️ 4. Training & Evaluation
-- Each model is trained on a train/val split.
-- Evaluation metrics:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1 Score
-- Confusion matrices are plotted and saved.
+    data/raw_data.csv
 
-### 📊 5. Visualizations
-- Confusion matrices (`{model}_confusion_matrix.png`)
-- Metrics comparison bar chart (`model_metrics_comparison.png`)
-- XGBoost accuracy/loss curves
-- Tree visualization for both XGBoost and RandomForest (1st tree)
-  ![image](https://github.com/user-attachments/assets/5fdf5606-8d3e-4a2c-b934-ed27c7a647b8)
+Step 3: Run the Pipeline
+------------------------
 
+    python GetData.py
+    python TokenizProcess.py
+    python Training-the-model.py
 
-### 📦 6. Saving Artifacts
-- Trained models saved as `.pkl` files with timestamp
-- Results saved to:
-  - `model_metrics.json`
-  - `model_results.csv`
-  - `model_report.md`
+Or run everything from the entry-point script:
 
-### 🤝 7. Ensemble Predictions
-- Supports weighted ensemble predictions based on `predict_proba`
-- Default weight is uniform
-- Automatically handles models without `predict_proba`
+    python main.py
 
----
+--------------------------------------
+📌 Notes
+--------------------------------------
 
-## 🚧 Work to be Done
+- `TokenizProcess.py` uses HuggingFace Transformers to compute BERT embeddings on GPU.
+- `Training-the-model.py` loads BERT features and trains a `VotingClassifier` (XGBoost + SVM).
+- Models and features are saved locally for reuse.
 
-### 🧪 1. **Final Evaluation on Test Set**
-- A separate, unseen test set should be evaluated to validate generalization.
+--------------------------------------
+🧪 Requirements
+--------------------------------------
 
-### 🛠️ 2. **Model Export for Inference**
-- Convert best-performing model(s) to ONNX / TorchScript for production deployment (optional).
+- torch
+- transformers
+- scikit-learn
+- xgboost
+- numpy
+- pandas
 
-### 🧠 3. **Interpretability and Explanation**
-- Use SHAP or LIME to provide model explanations, especially for XGBoost and Random Forest.
+For GPU training:
+- CUDA-compatible GPU
+- cudatoolkit version matching your GPU and PyTorch
 
-### 🔁 4. **Support for Multiclass / Multilabel Tasks**
-- Currently optimized for binary classification. Extend to handle multiclass cases.
-
-### 🧪 5. **Error Analysis**
-- Implement tools to analyze misclassified samples and improve model/data iteratively.
-
-### 🖥️ 6. **GUI or CLI Frontend**
-- Optional interactive interface for:
-  - Uploading new datasets
-  - Running predictions
-  - Comparing model performance visually
-
----
-
-## 🧰 Requirements
-
-```bash
-pip install torch transformers pandas scikit-learn xgboost seaborn matplotlib tqdm joblib
+--------------------------------------
+📝 Author
+--------------------------------------
+Horoaw - 2025
